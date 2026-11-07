@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#0b3d28">
+<script>try{var t=localStorage.getItem('absen_tema');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Absensi Pasar Group Buah Abadi</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/dist/face-api.js"></script>
+<style>
+:root{--bg:#0b3d28;--body-bg:radial-gradient(60vmax 45vmax at 92% -10%,rgba(90,220,140,.38),transparent 60%),radial-gradient(50vmax 40vmax at -12% 40%,rgba(200,241,53,.14),transparent 60%),linear-gradient(180deg,#0f5136,#0a3a26 55%,#072a1b);--panel:rgba(255,255,255,.07);--panel-2:rgba(255,255,255,.12);--line:rgba(255,255,255,.15);--ink:#f2fbef;--muted:#a6cbb4;--box:#0e402a;--overlay:rgba(2,28,16,.78);--camMsg:rgba(6,44,28,.86);--chipbg:rgba(6,44,28,.72);--stagebg:#04281a;--vignette:rgba(4,40,24,.55);--jam-end:#a8e6bd;--ph:#7fae92;--lime:#c8f135;--orange:#ff8a2a;--red:#ff5c5c;color-scheme:dark}
+:root[data-theme="dark"]{--bg:#0c0e12;--body-bg:radial-gradient(60vmax 40vmax at 92% -10%,rgba(200,241,53,.13),transparent 60%),radial-gradient(50vmax 40vmax at -12% 35%,rgba(255,138,42,.12),transparent 60%),#0c0e12;--panel:rgba(255,255,255,.05);--panel-2:rgba(255,255,255,.09);--line:rgba(255,255,255,.1);--ink:#eef1ea;--muted:#8f968c;--box:#14171c;--overlay:rgba(3,4,6,.76);--camMsg:rgba(10,12,15,.86);--chipbg:rgba(10,12,15,.7);--stagebg:#000;--vignette:rgba(0,0,0,.55);--jam-end:#aab59d;--ph:#5d645b}
+*{box-sizing:border-box;margin:0}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{min-height:100dvh;font-family:Manrope,system-ui,sans-serif;color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);position:relative;overflow-x:hidden;background:var(--body-bg);background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 50% 15%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse at 50% 15%,#000 15%,transparent 72%)}
+body>*{position:relative;z-index:1}
+button{font:800 .78rem Unbounded,sans-serif;letter-spacing:.01em;border:0;border-radius:999px;padding:14px 20px;cursor:pointer;min-height:50px;color:var(--ink);background:none;transition:transform .12s,box-shadow .2s,opacity .2s}
+button:active:not(:disabled){transform:scale(.96)}
+button:disabled{opacity:.3;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+.b-main{background:var(--lime);color:#0b1405;box-shadow:0 14px 34px -14px var(--lime)}
+.b-sun{background:var(--orange);color:#1d0d00;box-shadow:0 14px 34px -14px var(--orange)}
+.b-glass,.b-line{background:var(--panel-2);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.tema{min-height:38px;padding:8px 16px;font-size:.62rem}
+.tema::before{content:"";display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:9px;vertical-align:-1px;background:linear-gradient(90deg,#16a05f 50%,#0c0e12 50%);border:1px solid var(--line)}
+input,select{width:100%;font:500 1rem Manrope,sans-serif;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink);min-height:52px}
+input::placeholder{color:var(--ph)}
+label{display:block;font:500 .68rem 'JetBrains Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:16px 0 7px}
+.sheet{position:fixed;inset:0;background:var(--overlay);backdrop-filter:blur(8px);display:grid;place-items:end center;padding:12px;z-index:20;overflow:auto}
+.box{background:var(--box);border:1px solid var(--line);border-radius:30px;padding:24px;width:min(460px,100%);animation:up .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes up{from{transform:translateY(30px) scale(.97);opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.page{max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,36px) 44px}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:18px}
+.bar-r{display:flex;align-items:center;gap:10px}
+.wm{display:flex;align-items:center;gap:12px;font:800 .9rem Unbounded;letter-spacing:.06em}
+.wm small{display:block;font:500 .62rem 'JetBrains Mono';letter-spacing:.14em;color:var(--muted);margin-top:2px}
+.mark{width:42px;height:42px;border-radius:15px;background:var(--lime);display:grid;place-items:center;transform:rotate(-8deg);flex:none}
+.mark svg{width:24px;height:24px;fill:#0b1405}
+.live{display:flex;gap:9px;align-items:center;font:500 .7rem 'JetBrains Mono';color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--lime);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(200,241,53,.7)}70%,100%{box-shadow:0 0 0 10px transparent}}
+.clockbox{padding:34px 0 24px}
+#jam{font:700 clamp(3.1rem,15.5vw,7rem)/1 'JetBrains Mono',monospace;letter-spacing:-.05em;background:linear-gradient(180deg,#fff 30%,var(--jam-end));-webkit-background-clip:text;background-clip:text;color:transparent}
+#tgl{font-weight:600;color:var(--muted);margin-top:8px}
+.loc{display:inline-flex;align-items:center;gap:9px;margin-top:16px;padding:8px 15px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-size:.82rem;font-weight:600;backdrop-filter:blur(10px)}
+.loc i{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange)}
+@media(min-width:900px){.clockbox{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}.loc{margin:0 0 10px}}
+main{display:grid;gap:18px}
+@media(min-width:900px){main{grid-template-columns:1.1fr 1fr;align-items:start}}
+.stage{position:relative;border-radius:34px;overflow:hidden;aspect-ratio:3/4;max-height:74dvh;background:var(--stagebg);border:1px solid var(--line);box-shadow:0 40px 90px -40px rgba(200,241,53,.28)}
+@media(min-width:900px){.stage{aspect-ratio:4/3}}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 55%,var(--vignette))}
+video{width:100%;height:100%;object-fit:cover;display:block}
+video.mirror{transform:scaleX(-1)}
+.brk{position:absolute;inset:18px;pointer-events:none;z-index:2;background:linear-gradient(var(--lime),var(--lime)) 0 0/30px 3px,linear-gradient(var(--lime),var(--lime)) 0 0/3px 30px,linear-gradient(var(--lime),var(--lime)) 100% 0/30px 3px,linear-gradient(var(--lime),var(--lime)) 100% 0/3px 30px,linear-gradient(var(--lime),var(--lime)) 0 100%/30px 3px,linear-gradient(var(--lime),var(--lime)) 0 100%/3px 30px,linear-gradient(var(--lime),var(--lime)) 100% 100%/30px 3px,linear-gradient(var(--lime),var(--lime)) 100% 100%/3px 30px;background-repeat:no-repeat;opacity:.85}
+.ring{position:absolute;inset:13% 17%;border-radius:50%/46%;border:2px dashed rgba(255,255,255,.55);pointer-events:none;overflow:hidden;z-index:2;transition:border-color .3s,box-shadow .3s}
+.ring.warn{border-color:var(--orange)}
+.ring.ok{border:2px solid var(--lime);box-shadow:0 0 0 8px rgba(200,241,53,.16),0 0 60px rgba(200,241,53,.35),inset 0 0 50px rgba(200,241,53,.15)}
+.ring.ok::after{content:"";position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--lime),transparent);box-shadow:0 0 22px 2px var(--lime);animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{0%,100%{top:4%}50%{top:94%}}
+.cam-top{position:absolute;top:30px;left:30px;right:30px;display:flex;justify-content:space-between;gap:8px;z-index:3}
+.chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 14px;font:600 .74rem 'JetBrains Mono',monospace;background:var(--chipbg);border:1px solid var(--line);backdrop-filter:blur(10px);color:#fff}
+.chip i{width:8px;height:8px;border-radius:50%;background:#7b857a}
+.chip.ok i{background:var(--lime);box-shadow:0 0 10px var(--lime)}.chip.warn i{background:var(--orange)}.chip.bad i{background:var(--red)}
+.cam-msg{position:absolute;inset:0;display:grid;place-content:center;gap:14px;text-align:center;padding:30px;background:var(--camMsg);backdrop-filter:blur(6px);color:#dcebd2;font-weight:500;z-index:4}
+#btnFlip{min-height:38px;padding:8px 16px;font-size:.66rem}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:30px;padding:22px;backdrop-filter:blur(16px)}
+.geo{display:flex;gap:20px;align-items:center}
+.radar{position:relative;width:132px;height:132px;flex:none;border-radius:50%;border:1px solid var(--line);overflow:hidden;background:repeating-radial-gradient(circle,transparent 0 21px,rgba(255,255,255,.08) 21px 22px),radial-gradient(circle,rgba(200,241,53,.1),transparent 70%)}
+.radar::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(200,241,53,.4),transparent 26%);animation:spin 3.4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.zone{position:absolute;left:18.2%;top:18.2%;width:63.6%;height:63.6%;border-radius:50%;border:2px dashed var(--lime)}
+.core{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:var(--lime)}
+.dot{position:absolute;z-index:2;width:14px;height:14px;border-radius:50%;background:var(--red);border:2px solid #fff;transform:translate(-50%,-50%);box-shadow:0 0 14px var(--red);transition:left .5s,top .5s}
+.dot.in{background:var(--lime);box-shadow:0 0 16px var(--lime)}
+#jarak{font:800 clamp(1.9rem,8vw,2.5rem)/1 Unbounded;letter-spacing:-.05em}
+#gpsinfo{color:var(--muted);font-size:.84rem;margin-top:8px}
+.win{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.win div{padding:14px 15px;border-radius:20px;background:var(--panel);border:1px dashed rgba(255,255,255,.2);font-size:.74rem;line-height:1.45;color:var(--muted)}
+.win b{display:block;font:800 .74rem Unbounded;color:var(--ink);margin-bottom:5px}
+.win .on{border:1px solid var(--lime);background:rgba(200,241,53,.09)}.win .on b{color:var(--lime)}
+.win .late{border-color:var(--orange);background:rgba(255,138,42,.1)}.win .late b{color:var(--orange)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+#hint{margin-top:14px;min-height:1.5em;font:500 .78rem 'JetBrains Mono',monospace;color:var(--orange)}
+#hint:not(:empty)::before{content:"> "}
+.seal{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font:800 1.9rem Unbounded;margin-bottom:14px}
+.box.ok .seal{background:var(--lime);color:#0b1405;box-shadow:0 0 0 10px rgba(200,241,53,.15)}.box.ok .seal::after{content:"✓"}
+.box.err .seal{background:var(--red);color:#fff;box-shadow:0 0 0 10px rgba(255,92,92,.15)}.box.err .seal::after{content:"✕"}
+.box h2{font:800 1.3rem/1.2 Unbounded;letter-spacing:-.02em}
+.box p{color:var(--muted);margin-top:8px}
+.box img{width:100%;max-height:34dvh;object-fit:cover;border-radius:20px;margin:16px 0 4px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bar">
+    <div class="wm"><div class="mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M12 6c0-3 2-4 5-4 0 3-2 5-5 4z"/></svg></div><div>BUAH ABADI<small>ABSENSI PASAR</small></div></div>
+    <div class="bar-r"><button class="b-glass tema" aria-label="Ganti tema"></button><div class="live"><i></i>Live</div></div>
+  </div>
+  <div class="clockbox">
+    <div><div id="jam">--:--:--</div><div id="tgl"></div></div>
+    <div class="loc"><i></i><span id="lokasi">Memuat lokasi…</span></div>
+  </div>
+
+  <main>
+    <section class="stage" aria-label="Kamera">
+      <video id="video" autoplay playsinline muted class="mirror"></video>
+      <div class="ring" id="ring"></div><div class="brk"></div>
+      <div class="cam-top"><span class="chip" id="faceChip"><i></i><span>Memuat pemeriksa wajah…</span></span><button class="b-glass" id="btnFlip" hidden>Balik</button></div>
+      <div class="cam-msg" id="camMsg"><div>Kamera dipakai untuk memindai wajah dan foto bukti absen.</div><div><button class="b-main" id="btnCam">Aktifkan kamera</button></div><div><button class="b-glass" id="btnFile" hidden>Ambil foto lewat kamera HP</button></div></div>
+      <input type="file" id="fileCam" accept="image/*" capture="user" hidden>
+    </section>
+
+    <section class="panel">
+      <div class="geo">
+        <div class="radar" role="img" aria-label="Posisi Anda terhadap radius pasar"><div class="zone"></div><div class="core"></div><div class="dot" id="dot" style="display:none"></div></div>
+        <div><div id="jarak">–</div><div id="gpsinfo">Mencari sinyal GPS…</div></div>
+      </div>
+      <div class="win"><div id="wMasuk"><b>Masuk</b><span></span></div><div id="wPulang"><b>Pulang</b><span></span></div></div>
+      <div class="row">
+        <div><label for="idk">ID karyawan</label><input id="idk" autocomplete="username" autocapitalize="characters" placeholder="K001"></div>
+        <div><label for="pin">PIN</label><input id="pin" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" placeholder="••••"></div>
+      </div>
+      <div class="acts"><button class="b-main" id="btnMasuk" disabled>Absen masuk</button><button class="b-sun" id="btnPulang" disabled>Absen pulang</button></div>
+      <div id="hint" role="status"></div>
+    </section>
+  </main>
+</div>
+
+<div class="sheet" id="hasil" hidden><div class="box" id="hasilBox">
+  <div class="seal"></div><h2 id="hTitle"></h2><p id="hText"></p><img id="hImg" alt="Foto absen" hidden>
+  <button class="b-main" style="width:100%;margin-top:14px" id="hClose">Selesai</button>
+</div></div>
+
+<script>
+/* GANTI dengan URL Web app Apps Script Anda (berakhiran /exec) */
+const API_URL='https://script.google.com/macros/s/AKfycbwIvkSzJIOnZB-xtOKOu9V9uAdL-V_YPokZtGuXYjLsC7rTn9uEmq1BPyX7af6U_18GHw/exec';
+const MODEL_URL='https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/model/';
+let cfg=null, off=0, pos=null, stream=null, facing='user', busy=false, shotImg=null, faceReady=false, faceOk=false;
+const $=id=>document.getElementById(id);
+const pad=n=>String(n).padStart(2,'0');
+const lbl=m=>pad(Math.floor(m/60))+':'+pad(m%60);
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+fetch(API_URL+'?action=config').then(r=>r.json()).then(c=>{
+  if(c.ok===false)throw new Error(c.pesan);
+  cfg=c; off=c.serverNow-Date.now(); $('lokasi').textContent=c.nama;
+  $('wMasuk').querySelector('span').textContent=lbl(c.masuk.buka)+' - '+lbl(c.masuk.tutup)+', tepat waktu sampai '+lbl(c.masuk.tepat);
+  $('wPulang').querySelector('span').textContent=lbl(c.pulang.buka)+' - '+lbl(c.pulang.tutup);
+  tick();
+}).catch(e=>{$('lokasi').textContent='Gagal memuat konfigurasi: '+e.message});
+
+$('idk').value=store.get('absen_id')||'';
+['idk','pin'].forEach(i=>$(i).addEventListener('input',refresh));
+
+/* Jam & jendela waktu */
+function nowMin(){const t=new Date(Date.now()+off).toLocaleTimeString('en-GB',{timeZone:cfg.tz,hour12:false}).split(':');return{m:+t[0]*60+ +t[1],s:t.join(':')}}
+function winState(tipe,m){
+  const w=cfg[tipe];
+  if(m<w.buka)return{ok:false,t:'Dibuka '+lbl(w.buka)};
+  if(m>w.tutup)return{ok:false,t:'Ditutup '+lbl(w.tutup)};
+  return{ok:true,late:tipe==='masuk'&&m>w.tepat,t:tipe==='masuk'?(m>w.tepat?'Terlambat':'Tepat waktu'):'Dibuka'};
+}
+function tick(){
+  if(!cfg)return;
+  const n=nowMin(); $('jam').textContent=n.s;
+  $('tgl').textContent=new Date(Date.now()+off).toLocaleDateString('id-ID',{timeZone:cfg.tz,weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  [['masuk','wMasuk'],['pulang','wPulang']].forEach(([k,id])=>{
+    const s=winState(k,n.m),el=$(id);
+    el.className=(s.ok?'on':'')+(s.late?' late':'');
+    el.querySelector('b').textContent=(k==='masuk'?'Masuk: ':'Pulang: ')+s.t;
+  });
+  refresh();
+}
+setInterval(tick,1000);
+
+/* GPS */
+function dist(a,b,c,d){const R=6371000,r=Math.PI/180,x=Math.sin((c-a)*r/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin((d-b)*r/2)**2;return 2*R*Math.asin(Math.sqrt(x))}
+if(navigator.geolocation){
+  navigator.geolocation.watchPosition(p=>{pos={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy};drawGps()},
+    e=>{pos=null;$('gpsinfo').textContent=e.code===1?'Izin lokasi ditolak. Aktifkan lokasi untuk situs ini.':'Sinyal GPS belum tersedia.';refresh()},
+    {enableHighAccuracy:true,maximumAge:3000,timeout:20000});
+}else $('gpsinfo').textContent='Perangkat ini tidak mendukung GPS.';
+function drawGps(){
+  if(!cfg||!pos)return;
+  const d=dist(pos.lat,pos.lng,cfg.lat,cfg.lng),inside=d<=cfg.radius;
+  $('jarak').textContent=Math.round(d)+' m';
+  $('gpsinfo').textContent=(inside?'Dalam radius ':'Di luar radius ')+cfg.radius+' m, akurasi GPS ±'+Math.round(pos.acc)+' m';
+  const dx=(pos.lng-cfg.lng)*111320*Math.cos(cfg.lat*Math.PI/180),dy=(pos.lat-cfg.lat)*110540,k=70/cfg.radius;
+  let x=dx*k,y=-dy*k,l=Math.hypot(x,y);if(l>98){x*=98/l;y*=98/l}
+  const dot=$('dot');dot.style.display='';dot.style.left=(50+x/110*50)+'%';dot.style.top=(50+y/110*50)+'%';dot.classList.toggle('in',inside);
+  refresh();
+}
+
+/* Kamera */
+const camLive=()=>stream&&stream.active&&$('video').videoWidth>0;
+const camReady=()=>!!shotImg||camLive();
+async function startCam(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('camMsg').firstElementChild.textContent='Kamera langsung tidak tersedia di browser ini. Pakai tombol di bawah.';$('btnFile').hidden=false;return}
+  try{
+    if(stream)stream.getTracks().forEach(t=>t.stop());
+    stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1280},height:{ideal:960}},audio:false});
+    const v=$('video');v.srcObject=stream;v.classList.toggle('mirror',facing==='user');await v.play();
+    $('camMsg').hidden=true;$('btnFlip').hidden=false;
+  }catch(e){
+    $('camMsg').hidden=false;$('btnFile').hidden=false;
+    $('camMsg').firstElementChild.textContent=e.name==='NotAllowedError'?'Izin kamera ditolak. Aktifkan izin kamera di pengaturan browser, lalu coba lagi.':'Kamera tidak bisa dibuka: '+e.message;
+  }
+  refresh();
+}
+$('btnCam').onclick=startCam;
+$('btnFlip').onclick=()=>{facing=facing==='user'?'environment':'user';startCam()};
+$('btnFile').onclick=()=>$('fileCam').click();
+$('fileCam').onchange=e=>{
+  const f=e.target.files[0];if(!f)return;
+  const im=new Image();
+  im.onload=async()=>{
+    shotImg=im;faceOk=false;$('camMsg').hidden=false;$('camMsg').firstElementChild.textContent='Foto diterima, memeriksa wajah…';refresh();
+    if(faceReady){try{const r=await faceapi.detectAllFaces(im,TFO());faceOk=r.length===1;$('camMsg').firstElementChild.textContent=faceOk?'Foto siap dikirim.':'Wajah tidak terlihat jelas atau lebih dari satu. Ambil foto ulang.'}catch(x){}}
+    refresh();
+  };
+  im.src=URL.createObjectURL(f);e.target.value='';
+};
+
+/* Deteksi wajah real time */
+const TFO=()=>new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:0.5});
+function setFace(t,c){$('faceChip').className='chip '+c;$('faceChip').lastElementChild.textContent=t;$('ring').className='ring '+(c==='ok'?'ok':c==='warn'?'warn':'')}
+async function loadFace(){
+  try{
+    await Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)]);
+    faceReady=true;setFace('Arahkan wajah ke kamera','');loopFace();
+  }catch(e){setFace('Pemeriksa wajah gagal dimuat. Muat ulang halaman.','bad')}
+  refresh();
+}
+async function loopFace(){
+  if(!busy&&!shotImg&&camLive()){
+    try{
+      const r=await faceapi.detectAllFaces($('video'),TFO());
+      faceOk=r.length===1;
+      setFace(r.length===0?'Wajah belum terlihat':r.length>1?'Terdeteksi lebih dari satu wajah':'Wajah terdeteksi',faceOk?'ok':'warn');
+      refresh();
+    }catch(e){}
+  }
+  setTimeout(loopFace,700);
+}
+if(window.faceapi)loadFace();else setFace('Pemeriksa wajah gagal dimuat. Cek koneksi internet.','bad');
+
+/* Status tombol */
+function refresh(){
+  if(!cfg)return;
+  const n=nowMin(),id=$('idk').value.trim(),pin=$('pin').value;
+  const inside=pos&&dist(pos.lat,pos.lng,cfg.lat,cfg.lng)<=cfg.radius,accOk=pos&&pos.acc<=cfg.akurasiMaks;
+  let why='';
+  if(!camReady())why='Aktifkan kamera dulu.';
+  else if(!faceReady)why='Memuat pemeriksa wajah…';
+  else if(!faceOk)why='Arahkan satu wajah ke kamera.';
+  else if(!pos)why='Menunggu lokasi GPS…';
+  else if(!accOk)why='Akurasi GPS ±'+Math.round(pos.acc)+' m, perlu ≤ '+cfg.akurasiMaks+' m. Pindah ke tempat terbuka.';
+  else if(!inside)why='Anda berada di luar radius pasar.';
+  else if(!id||!pin)why='Isi ID karyawan dan PIN.';
+  const m=winState('masuk',n.m),p=winState('pulang',n.m),base=!why&&!busy;
+  $('btnMasuk').disabled=!(base&&m.ok);$('btnPulang').disabled=!(base&&p.ok);
+  if(!why&&!m.ok&&!p.ok)why='Di luar jam absen.';
+  $('hint').textContent=busy?'Memproses wajah dan mengirim absen…':why;
+}
+
+/* Ambil foto, hitung descriptor wajah, kirim */
+function snap(src,label){
+  const live=src===$('video'),sw=live?src.videoWidth:src.naturalWidth,sh=live?src.videoHeight:src.naturalHeight,w=Math.min(720,sw),h=Math.round(w*sh/sw);
+  const c=document.createElement('canvas');c.width=w;c.height=h;
+  const g=c.getContext('2d');g.drawImage(src,0,0,w,h);
+  g.fillStyle='rgba(0,0,0,.55)';g.fillRect(0,h-34,w,34);
+  g.fillStyle='#fff';g.font='600 15px sans-serif';g.fillText(label,10,h-12);
+  return c.toDataURL('image/jpeg',0.72);
+}
+async function kirim(tipe){
+  if(busy)return;busy=true;refresh();
+  const id=$('idk').value.trim().toUpperCase();store.set('absen_id',id);
+  const src=shotImg||$('video');
+  try{
+    const det=await faceapi.detectSingleFace(src,TFO()).withFaceLandmarks(true).withFaceDescriptor();
+    if(!det){busy=false;tampil({ok:false,pesan:'Wajah tidak terbaca jelas. Coba lagi dengan pencahayaan lebih baik.'},null);refresh();return}
+    const stamp=snap(src,id+'  '+tipe+'  '+$('tgl').textContent+' '+$('jam').textContent);
+    const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({action:'absen',data:{id,pin:$('pin').value,tipe,lat:pos.lat,lng:pos.lng,akurasi:pos.acc,desc:Array.from(det.descriptor),foto:stamp.split(',')[1]}})}).then(x=>x.json());
+    busy=false;tampil(r,stamp);
+    if(r.ok){shotImg=null;faceOk=false;if(!camLive())$('camMsg').firstElementChild.textContent='Ambil foto baru untuk absen berikutnya.'}
+    $('pin').value='';
+  }catch(e){busy=false;tampil({ok:false,pesan:'Tidak bisa terhubung ke server. Cek koneksi internet Anda.'},null)}
+  refresh();
+}
+$('btnMasuk').onclick=()=>kirim('Masuk');
+$('btnPulang').onclick=()=>kirim('Pulang');
+
+function tampil(r,img){
+  $('hasilBox').className='box '+(r.ok?'ok':'err');
+  $('hTitle').textContent=r.ok?'Absen '+r.tipe.toLowerCase()+' berhasil':'Absen belum berhasil';
+  $('hText').textContent=r.ok?r.nama+', '+r.status+' pukul '+r.jam+', jarak '+r.jarak+' m dari pasar.':r.pesan;
+  $('hImg').hidden=!(r.ok&&img);if(r.ok&&img)$('hImg').src=img;
+  $('hasil').hidden=false;$('hClose').focus();
+}
+$('hClose').onclick=()=>{$('hasil').hidden=true};
+
+/* Tema: hijau atau gelap */
+function setTema(t){
+  document.documentElement.setAttribute('data-theme',t);
+  try{localStorage.setItem('absen_tema',t)}catch(e){}
+  document.querySelectorAll('.tema').forEach(b=>b.textContent=t==='dark'?'Tema: Gelap':'Tema: Hijau');
+  const m=document.querySelector('meta[name=theme-color]');if(m)m.setAttribute('content',t==='dark'?'#0c0e12':'#0b3d28');
+}
+document.querySelectorAll('.tema').forEach(b=>b.onclick=()=>setTema(document.documentElement.getAttribute('data-theme')==='dark'?'green':'dark'));
+setTema(document.documentElement.getAttribute('data-theme')==='dark'?'dark':'green');
+</script>
+</body>
+</html>
