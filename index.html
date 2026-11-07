@@ -282,7 +282,7 @@ video.mirror{transform:scaleX(-1)}
     <div id="tHari">
       <div class="card range">
         <div class="rg"><div><label for="aTgl">Dari tanggal</label><input type="date" id="aTgl"></div><div><label for="aTgl2">Sampai tanggal</label><input type="date" id="aTgl2"></div></div>
-        <div class="qk"><button class="b-line" data-q="hari">Hari ini</button><button class="b-line" data-q="7">7 hari</button><button class="b-line" data-q="bulan">Bulan ini</button></div>
+        <div class="qk"><button class="b-line" data-q="hari">Hari ini</button><button class="b-line" data-q="7">7 hari</button><button class="b-line" data-q="bulan">Bulan ini</button><button class="b-main" id="btnWa">Kirim ke WhatsApp</button></div>
       </div>
       <div class="stats" id="stats"></div>
       <div id="vHarian">
@@ -542,14 +542,37 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
 });
 
 /* Kehadiran */
-let loadSeq=0,rentangData=null;
+let loadSeq=0,rentangData=null,waPesan='';
+const tglPanjang=t=>new Date(t+'T00:00:00Z').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
+function pesanHarian(d){
+  const h=d.hadir.slice().sort((a,b)=>String(a.masuk.jam).localeCompare(String(b.masuk.jam))),k=d.ringkas;
+  const L=['*Absensi '+d.lokasi+'*',tglPanjang(d.tanggal),'',
+    'Hadir: '+k.hadir+' dari '+k.aktif+' karyawan','Terlambat: '+k.terlambat,'Belum absen: '+k.belum,'','*Sudah absen*'];
+  if(h.length)h.forEach((w,i)=>L.push((i+1)+'. '+w.nama+' - '+String(w.masuk.jam).slice(0,5)+(w.masuk.status==='Terlambat'?' (terlambat)':'')));
+  else L.push('-');
+  L.push('','*Belum absen*');
+  if(d.belum.length)d.belum.forEach(w=>L.push('- '+w.nama));else L.push('-');
+  return L.join('\n');
+}
+function pesanRentang(x){
+  const k=x.ringkas;
+  const L=['*Rekap Absensi '+x.lokasi+'*','Periode: '+tglId(x.dari)+' - '+tglId(x.sampai)+' ('+x.hari+' hari)','',
+    'Total absen masuk: '+k.hadir,'Terlambat: '+k.terlambat,'','*Per karyawan*'];
+  x.rekap.forEach((w,i)=>L.push((i+1)+'. '+w.nama+': hadir '+w.hadir+', terlambat '+w.terlambat+', tidak hadir '+w.tidakHadir));
+  return L.join('\n');
+}
+$('btnWa').onclick=()=>{
+  if(!waPesan){alert('Data belum selesai dimuat. Coba lagi sebentar.');return}
+  let t=waPesan;if(t.length>3500)t=t.slice(0,t.lastIndexOf('\n',3500))+'\n…(dipotong)';
+  window.open('https://wa.me/?text='+encodeURIComponent(t),'_blank','noopener');
+};
 const tglId=t=>t.slice(8,10)+'/'+t.slice(5,7)+'/'+t.slice(0,4);
 function statCards(a){$('stats').innerHTML=a.map(x=>'<div class="card stat '+x[2]+'"><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('')}
 async function load(){
   let d=$('aTgl').value,s=$('aTgl2').value;
   if(!d)d=$('aTgl').value=todayWib();
   if(!s||s<d)s=$('aTgl2').value=d;
-  const my=++loadSeq;
+  const my=++loadSeq;waPesan='';
   if(d===s)return loadHari(d,my);
   return loadRentang(d,s,my);
 }
@@ -566,7 +589,7 @@ async function loadRentang(d,s,my){
   const r=await api('admin_rentang',{dari:d,sampai:s});
   if(my!==loadSeq)return;
   if(!r.ok){$('mtBody').innerHTML='<tr><td>'+esc(r.pesan)+'</td></tr>';return}
-  const x=r.data,k=x.ringkas;rentangData=x;
+  const x=r.data,k=x.ringkas;rentangData=x;waPesan=pesanRentang(x);
   $('subLok').textContent=x.lokasi+', radius '+x.radius+' m';
   statCards([['Karyawan aktif',k.aktif,''],['Jumlah hari',k.hari,''],['Total absen masuk',k.hadir,''],['Terlambat',k.terlambat,'late']]);
   const m=buatMatriks(x);
@@ -593,6 +616,7 @@ async function loadHari(tgl,my){
   if(!r.ok){$('hadir').innerHTML='<div class="card">'+esc(r.pesan)+'</div>';return}
   const d=r.data,s=d.ringkas;
   $('subLok').textContent=d.lokasi+', radius '+d.radius+' m';
+  waPesan=pesanHarian(d);
   statCards([['Karyawan aktif',s.aktif,''],['Sudah hadir',s.hadir,''],['Terlambat',s.terlambat,'late'],['Belum absen',s.belum,'miss']]);
   $('hadir').innerHTML=d.hadir.length?d.hadir.map(h=>
     '<div class="card"><div class="emp-h"><b>'+esc(h.nama)+'</b><span>'+esc(h.id)+' · '+esc(h.jabatan)+'</span></div><div class="shots">'+shot('Masuk',h.masuk,d.radius)+'</div></div>').join(''):'<div class="card">Belum ada yang absen pada tanggal ini.</div>';
