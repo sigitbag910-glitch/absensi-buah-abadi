@@ -95,13 +95,81 @@ video.mirror{transform:scaleX(-1)}
 .box h2{font:800 1.3rem/1.2 Unbounded;letter-spacing:-.02em}
 .box p{color:var(--muted);margin-top:8px}
 .box img{width:100%;max-height:34dvh;object-fit:cover;border-radius:20px;margin:16px 0 4px}
+#vAdmin .top{padding:calc(env(safe-area-inset-top) + 24px) clamp(16px,4vw,36px) 8px}
+#vAdmin .wrap{max-width:1180px;margin:0 auto}
+#vAdmin .top .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+#vAdmin h1{font:800 clamp(1.25rem,4vw,1.8rem) Unbounded;letter-spacing:-.03em}
+#vAdmin h1::before{content:"";display:inline-block;width:.5em;height:.5em;border-radius:50%;background:var(--lime);margin-right:.55em;box-shadow:0 0 18px var(--lime)}
+#vAdmin .sub{font:500 .7rem 'JetBrains Mono';letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+#vAdmin .amain{max-width:1180px;margin:0 auto;padding:10px clamp(14px,4vw,36px) 56px}
+#vAdmin .card{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:20px;backdrop-filter:blur(16px)}
+#vAdmin .login{max-width:400px;margin:36px auto 0;padding:0 16px}
+#vAdmin .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#vAdmin .tools input[type=date]{width:auto;font:500 .9rem 'JetBrains Mono',monospace;min-height:46px;padding:10px 14px}
+#vAdmin .tools button{min-height:46px;padding:11px 18px;font-size:.68rem}
+#vAdmin .tools .tema{min-height:46px;padding:11px 18px;font-size:.62rem}
+#vAdmin .tabs{display:flex;gap:4px;background:var(--panel);border:1px solid var(--line);padding:4px;border-radius:999px}
+#vAdmin .tabs button{min-height:40px;padding:9px 18px;font-size:.68rem}
+#vAdmin .tabs button.on{background:var(--lime);color:#0b1405}
+#vAdmin .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 6px}
+#vAdmin .stat{padding:20px 18px;position:relative;overflow:hidden}
+#vAdmin .stat::before{content:"";position:absolute;left:0;top:0;height:3px;width:46%;background:var(--lime)}
+#vAdmin .stat.late::before{background:var(--orange)}
+#vAdmin .stat.miss::before{background:var(--red)}
+#vAdmin .stat b{display:block;font:800 2.5rem/1 Unbounded;letter-spacing:-.05em}
+#vAdmin .stat span{display:block;margin-top:12px;font:500 .66rem 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#vAdmin h2{font:800 .74rem Unbounded;letter-spacing:.1em;text-transform:uppercase;margin:34px 0 14px;color:var(--muted)}
+#vAdmin .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,350px),1fr));gap:14px}
+#vAdmin .emp-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:14px}
+#vAdmin .emp-h b{font:800 1rem Unbounded;letter-spacing:-.02em}
+#vAdmin .emp-h span{font:500 .68rem 'JetBrains Mono';letter-spacing:.06em;color:var(--muted);text-align:right}
+#vAdmin .shots{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#vAdmin figure{margin:0}
+#vAdmin .ph{position:relative;aspect-ratio:3/4;border-radius:20px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.2);display:grid;place-items:center;text-align:center;font-size:.74rem;color:var(--muted);padding:10px;overflow:hidden}
+#vAdmin .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;cursor:zoom-in}
+#vAdmin .ph:has(img){border:1px solid var(--line)}
+#vAdmin figcaption{font-size:.76rem;color:var(--muted);margin-top:9px;line-height:1.6}
+#vAdmin figcaption b{color:var(--ink);font:800 .78rem Unbounded}
+#vAdmin .tag{display:inline-block;border-radius:999px;padding:2px 10px;font:700 .64rem 'JetBrains Mono';letter-spacing:.05em;text-transform:uppercase;background:rgba(200,241,53,.14);color:var(--lime)}
+#vAdmin .tag.late{background:rgba(255,138,42,.16);color:var(--orange)}
+#vAdmin .tag.bad{background:rgba(255,92,92,.16);color:var(--red)}
+#vAdmin a{color:var(--lime);font-weight:700;text-underline-offset:3px}
+#vAdmin .pills{display:flex;flex-wrap:wrap;gap:8px}
+#vAdmin .pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.86rem;font-weight:600}
+#vAdmin .pill small{color:var(--muted);font:500 .68rem 'JetBrains Mono';margin-left:4px}
+#vAdmin table{width:100%;border-collapse:collapse;font-size:.92rem}
+#vAdmin th,#vAdmin td{text-align:left;padding:14px 8px;border-bottom:1px solid var(--line)}
+#vAdmin th{font:500 .64rem 'JetBrains Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#vAdmin td .b-line{min-height:38px;padding:8px 16px;font-size:.64rem}
+#vAdmin .aerr{color:var(--red);font-size:.86rem;margin-top:12px;min-height:1.2em}
+#vAdmin .zoom img{max-width:min(92vw,720px);max-height:88dvh;border-radius:22px;border:1px solid var(--line)}
+#vAdmin #prev{width:100%;max-height:220px;object-fit:cover;border-radius:18px;margin-top:10px}
+
+
+
+.mini{min-height:38px;padding:8px 16px;font-size:.62rem}
+.bar{flex-wrap:wrap}.bar-r{margin-left:auto}
+@media(max-width:560px){.live{display:none}}
+#vAdmin .sheet{display:flex;justify-content:center;align-items:flex-start}
+#vAdmin .sheet>*{margin:auto}
+@media(max-width:560px){#vAdmin th:nth-child(4),#vAdmin td:nth-child(4){display:none}}
+.kf{width:48px;height:48px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-size:.7rem}
+.kf img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick button{min-height:46px;padding:10px 12px;font-size:.66rem}
+.kcam{position:relative;aspect-ratio:4/3;border-radius:20px;overflow:hidden;background:#000;margin-top:10px;border:1px solid var(--line)}
+.kcam-b{display:flex;gap:8px;margin-top:10px}
+.kcam-b button{flex:1;min-height:44px;padding:8px 12px;font-size:.64rem}
+#fotoInfo{font:500 .74rem 'JetBrains Mono',monospace;margin-top:10px;min-height:1.2em;color:var(--muted)}
+#fotoInfo.ok{color:var(--lime)}#fotoInfo.bad{color:var(--red)}
 </style>
 </head>
 <body>
+<div id="vAbsen">
 <div class="page">
   <div class="bar">
     <div class="wm"><div class="mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M12 6c0-3 2-4 5-4 0 3-2 5-5 4z"/></svg></div><div>BUAH ABADI<small>ABSENSI PASAR</small></div></div>
-    <div class="bar-r"><button class="b-glass tema" aria-label="Ganti tema"></button><div class="live"><i></i>Live</div></div>
+    <div class="bar-r"><button class="b-glass mini" id="btnAdmin">Login Admin</button><button class="b-glass tema" aria-label="Ganti tema"></button><div class="live"><i></i>Live</div></div>
   </div>
   <div class="clockbox">
     <div><div id="jam">--:--:--</div><div id="tgl"></div></div>
@@ -137,6 +205,59 @@ video.mirror{transform:scaleX(-1)}
   <div class="seal"></div><h2 id="hTitle"></h2><p id="hText"></p><img id="hImg" alt="Foto absen" hidden>
   <button class="b-main" style="width:100%;margin-top:14px" id="hClose">Selesai</button>
 </div></div>
+</div>
+
+<div id="vAdmin" hidden>
+<section id="aLogin" hidden>
+  <div class="top"><div class="wrap"><div><h1>Dashboard Admin</h1><div class="sub">Absensi Pasar Group Buah Abadi</div></div><button class="b-glass tema" aria-label="Ganti tema"></button></div></div>
+  <div class="login"><div class="card">
+    <label for="apin" style="margin-top:0">PIN admin</label>
+    <input id="apin" type="password" autocomplete="current-password" placeholder="••••••">
+    <button class="b-main" id="btnLogin" style="width:100%;margin-top:14px">Masuk</button>
+    <button class="b-line" id="btnBack" style="width:100%;margin-top:10px">Kembali ke absensi</button>
+    <div class="aerr" id="loginErr"></div>
+  </div></div>
+</section>
+
+<section id="aApp" hidden>
+  <div class="top"><div class="wrap">
+    <div><h1>Dashboard Admin</h1><div class="sub" id="subLok">Absensi Pasar Group Buah Abadi</div></div>
+    <div class="tabs"><button class="on" data-tab="hari">Kehadiran</button><button data-tab="kar">Karyawan</button></div>
+    <div class="tools"><input type="date" id="aTgl" aria-label="Tanggal"><button class="b-glass tema" aria-label="Ganti tema"></button><button class="b-glass" id="btnRef">Muat ulang</button><button class="b-glass" id="btnOut">Keluar</button></div>
+  </div></div>
+  <div class="amain">
+    <div id="tHari">
+      <div class="stats" id="stats"></div>
+      <h2>Sudah absen</h2><div class="grid" id="hadir"></div>
+      <h2>Belum absen</h2><div class="pills" id="belum"></div>
+    </div>
+    <div id="tKar" hidden>
+      <div class="card">
+        <div class="tools" style="justify-content:space-between;margin-bottom:8px"><b>Daftar karyawan</b><button class="b-main" id="btnTambah">Tambah karyawan</button></div>
+        <table><thead><tr><th>Foto</th><th>ID</th><th>Nama</th><th>Jabatan</th><th>Wajah</th><th></th></tr></thead><tbody id="karBody"></tbody></table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="sheet" id="mKar" hidden><div class="box">
+  <h1 id="mTitle" style="font-size:1.25rem">Karyawan</h1>
+  <label for="kId">ID</label><input id="kId" autocapitalize="characters" placeholder="K001">
+  <label for="kNama">Nama lengkap</label><input id="kNama">
+  <label for="kJab">Jabatan</label><input id="kJab">
+  <label for="kPin">PIN <span id="pinNote"></span></label><input id="kPin" type="password" inputmode="numeric" maxlength="8">
+  <label for="kSt">Status</label><select id="kSt"><option>Aktif</option><option>Nonaktif</option></select>
+  <label>Foto wajah (jelas, menghadap depan, satu orang)</label>
+  <div class="pick"><button type="button" class="b-line" id="kUp">Upload foto</button><button type="button" class="b-line" id="kCam">Buka kamera</button></div>
+  <input id="kFoto" type="file" accept="image/*" hidden><input id="kFotoCam" type="file" accept="image/*" capture="user" hidden>
+  <div class="kcam" id="kCamBox" hidden><video id="kVideo" autoplay playsinline muted class="mirror"></video></div>
+  <div class="kcam-b" id="kCamBtn" hidden><button type="button" class="b-main" id="kSnap">Ambil foto</button><button type="button" class="b-glass" id="kFlip">Balik</button><button type="button" class="b-line" id="kCamX">Tutup</button></div>
+  <img id="prev" alt="Pratinjau foto wajah" hidden><div id="fotoInfo" role="status"></div>
+  <div class="aerr" id="kErr"></div>
+  <div style="display:flex;gap:10px;margin-top:14px"><button class="b-line" id="kBatal" style="flex:1">Batal</button><button class="b-main" id="kSimpan" style="flex:1">Simpan</button></div>
+</div></div>
+<div class="sheet zoom" id="mZoom" hidden><img id="zImg" alt="Foto absen"></div>
+</div>
 
 <script>
 /* GANTI dengan URL Web app Apps Script Anda (berakhiran /exec) */
@@ -214,6 +335,14 @@ async function startCam(){
   }
   refresh();
 }
+const CAM_MSG='Kamera dipakai untuk memindai wajah dan foto bukti absen.';
+function stopCam(){
+  if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}
+  $('video').srcObject=null;shotImg=null;faceOk=false;$('pin').value='';
+  $('camMsg').hidden=false;$('camMsg').firstElementChild.textContent=CAM_MSG;$('btnFlip').hidden=true;
+  if(faceReady)setFace('Arahkan wajah ke kamera','');
+  refresh();
+}
 $('btnCam').onclick=startCam;
 $('btnFlip').onclick=()=>{facing=facing==='user'?'environment':'user';startCam()};
 $('btnFile').onclick=()=>$('fileCam').click();
@@ -231,9 +360,11 @@ $('fileCam').onchange=e=>{
 /* Deteksi wajah real time */
 const TFO=()=>new faceapi.TinyFaceDetectorOptions({inputSize:320,scoreThreshold:0.5});
 function setFace(t,c){$('faceChip').className='chip '+c;$('faceChip').lastElementChild.textContent=t;$('ring').className='ring '+(c==='ok'?'ok':c==='warn'?'warn':'')}
+let modelsP=null;
+function loadModels(){if(!modelsP)modelsP=Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)]).catch(e=>{modelsP=null;throw e});return modelsP}
 async function loadFace(){
   try{
-    await Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),faceapi.nets.faceLandmark68TinyNet.loadFromUri(MODEL_URL),faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL)]);
+    await loadModels();
     faceReady=true;setFace('Arahkan wajah ke kamera','');loopFace();
   }catch(e){setFace('Pemeriksa wajah gagal dimuat. Muat ulang halaman.','bad')}
   refresh();
@@ -306,6 +437,152 @@ function tampil(r,img){
   $('hasil').hidden=false;$('hClose').focus();
 }
 $('hClose').onclick=()=>{$('hasil').hidden=true};
+
+const ss={get(k){try{return sessionStorage.getItem(k)}catch(e){return null}},set(k,v){try{sessionStorage.setItem(k,v)}catch(e){}},del(k){try{sessionStorage.removeItem(k)}catch(e){}}};
+let token=ss.get('adm_token'),karList=[],photoCache={};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+async function api(action,p){
+  const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(Object.assign({action,token},p||{}))}).then(x=>x.json());
+  if(r.ok===false&&/Sesi admin/.test(r.pesan||'')){logout();}
+  return r;
+}
+function view(v){$('vAbsen').hidden=v!=='absen';$('vAdmin').hidden=v==='absen';$('aLogin').hidden=v!=='login';$('aApp').hidden=v!=='app';window.scrollTo(0,0)}
+function logout(){token=null;ss.del('adm_token');view('login')}
+function bukaAdmin(){stopCam();if(token)start();else{view('login');$('apin').focus()}}
+$('btnAdmin').onclick=bukaAdmin;
+$('btnBack').onclick=()=>view('absen');
+
+$('btnLogin').onclick=async()=>{
+  $('loginErr').textContent='';$('btnLogin').disabled=true;
+  try{
+    const r=await api('admin_login',{pin:$('apin').value});
+    if(!r.ok){$('loginErr').textContent=r.pesan;return}
+    token=r.token;ss.set('adm_token',token);$('apin').value='';start();
+  }catch(e){$('loginErr').textContent='Tidak bisa terhubung ke server.'}
+  finally{$('btnLogin').disabled=false}
+};
+$('apin').addEventListener('keydown',e=>{if(e.key==='Enter')$('btnLogin').click()});
+$('btnOut').onclick=()=>{token=null;ss.del('adm_token');tutupKar();view('absen')};
+$('btnRef').onclick=()=>{photoCache={};load()};
+$('aTgl').onchange=load;
+
+function todayWib(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Jakarta'})}
+function start(){view('app');if(!$('aTgl').value)$('aTgl').value=todayWib();load();loadKar()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  $('tHari').hidden=b.dataset.tab!=='hari';$('tKar').hidden=b.dataset.tab!=='kar';
+});
+
+/* Kehadiran */
+async function load(){
+  $('hadir').innerHTML='<div class="card">Memuat…</div>';
+  const r=await api('admin_rekap',{tanggal:$('aTgl').value});
+  if(!r.ok){$('hadir').innerHTML='<div class="card">'+esc(r.pesan)+'</div>';return}
+  const d=r.data,s=d.ringkas;
+  $('subLok').textContent=d.lokasi+', radius '+d.radius+' m';
+  $('stats').innerHTML=[['Karyawan aktif',s.aktif,''],['Sudah hadir',s.hadir,''],['Terlambat',s.terlambat,'late'],['Belum absen',s.belum,'miss'],['Sudah pulang',s.pulang,'']]
+    .map(x=>'<div class="card stat '+x[2]+'"><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+  $('hadir').innerHTML=d.hadir.length?d.hadir.map(h=>
+    '<div class="card"><div class="emp-h"><b>'+esc(h.nama)+'</b><span>'+esc(h.id)+' · '+esc(h.jabatan)+'</span></div><div class="shots">'+shot('Masuk',h.masuk,d.radius)+shot('Pulang',h.pulang,d.radius)+'</div></div>').join(''):'<div class="card">Belum ada yang absen pada tanggal ini.</div>';
+  $('belum').innerHTML=d.belum.length?d.belum.map(k=>'<span class="pill">'+esc(k.nama)+' <small>'+esc(k.id)+'</small></span>').join(''):'<span class="sub" style="color:var(--muted)">Semua karyawan aktif sudah absen.</span>';
+  lazy();
+}
+function shot(tipe,x,radius){
+  if(!x)return '<figure><div class="ph">Belum absen '+tipe.toLowerCase()+'</div></figure>';
+  const out=x.jarak>radius,cls=x.status==='Terlambat'?'late':'';
+  return '<figure><div class="ph">'+(x.foto?'<span data-url="'+esc(x.foto)+'">Memuat foto…</span>':'Tanpa foto')+'</div><figcaption><b>'+tipe+' '+esc(String(x.jam).slice(0,5))+'</b> <span class="tag '+cls+'">'+esc(x.status)+'</span><br>Jarak '+esc(x.jarak)+' m dari lokasi'+(out?' <span class="tag bad">di luar radius</span>':'')+
+    '<br>Kecocokan wajah: '+(x.wajah===''||x.wajah==null?'tidak dicek':esc(x.wajah)+' (makin kecil makin mirip)')+
+    '<br><a href="https://www.google.com/maps?q='+esc(x.lat)+','+esc(x.lng)+'" target="_blank" rel="noopener">Lihat di peta</a></figcaption></figure>';
+}
+const io=new IntersectionObserver(es=>es.forEach(async e=>{
+  if(!e.isIntersecting)return;io.unobserve(e.target);
+  const el=e.target,u=el.dataset.url;
+  try{
+    if(!photoCache[u]){const r=await api('admin_foto',{url:u});if(!r.ok)throw new Error(r.pesan);photoCache[u]=r.data}
+    el.outerHTML='<img src="'+photoCache[u]+'" alt="Foto absen" data-z="1">';
+  }catch(x){el.textContent='Foto gagal dimuat'}
+}),{rootMargin:'200px'});
+function lazy(){document.querySelectorAll('[data-url]').forEach(el=>io.observe(el))}
+document.addEventListener('click',e=>{if(e.target.dataset&&e.target.dataset.z){$('zImg').src=e.target.src;$('mZoom').hidden=false}});
+$('mZoom').onclick=()=>{$('mZoom').hidden=true};
+
+/* Karyawan */
+async function loadKar(){
+  const r=await api('admin_karyawan');if(!r.ok)return;
+  karList=r.data;
+  $('karBody').innerHTML=karList.map((k,i)=>'<tr><td><div class="kf">'+(k.fotoWajah?'<span data-url="'+esc(k.fotoWajah)+'">…</span>':'<span>–</span>')+'</div></td><td>'+esc(k.id)+'</td><td>'+esc(k.nama)+(k.status!=='Aktif'?' <span class="tag bad">nonaktif</span>':'')+'</td><td>'+esc(k.jabatan)+'</td><td><span class="tag '+(k.wajah?'':'bad')+'">'+(k.wajah?'Terdaftar':'Belum')+'</span></td><td><button class="b-line" data-edit="'+i+'">Ubah</button></td></tr>').join('')||'<tr><td colspan="6">Belum ada karyawan.</td></tr>';lazy();
+}
+$('karBody').onclick=e=>{const i=e.target.dataset.edit;if(i!==undefined)openKar(karList[i])};
+$('btnTambah').onclick=()=>openKar(null);
+
+/* Form karyawan + foto wajah (upload / kamera) */
+let admStream=null,admFacing='user',fotoJob=null,fotoDesc=null,fotoJpg=null;
+const DOPT=()=>new faceapi.TinyFaceDetectorOptions({inputSize:416,scoreThreshold:0.5});
+function info(t,c){const e=$('fotoInfo');e.textContent=t;e.className=c||''}
+function openKar(k){
+  stopAdmCam();fotoJob=fotoDesc=fotoJpg=null;
+  $('mTitle').textContent=k?'Ubah karyawan':'Tambah karyawan';
+  $('kId').value=k?k.id:'';$('kId').readOnly=!!k;$('kNama').value=k?k.nama:'';$('kJab').value=k?k.jabatan:'';
+  $('kPin').value='';$('pinNote').textContent=k?'(kosongkan bila tidak diubah)':'';$('kSt').value=k?k.status:'Aktif';
+  $('prev').hidden=true;info('');$('kErr').textContent='';$('mKar').hidden=false;
+  if(window.faceapi)loadModels().catch(()=>{});
+}
+function tutupKar(){stopAdmCam();$('mKar').hidden=true}
+$('kBatal').onclick=tutupKar;
+function stopAdmCam(){
+  if(admStream){admStream.getTracks().forEach(t=>t.stop());admStream=null}
+  $('kVideo').srcObject=null;$('kCamBox').hidden=true;$('kCamBtn').hidden=true;
+}
+async function bukaKamera(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){$('kFotoCam').click();return}
+  try{
+    stopAdmCam();
+    admStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:admFacing},width:{ideal:1280},height:{ideal:960}},audio:false});
+    const v=$('kVideo');v.srcObject=admStream;v.classList.toggle('mirror',admFacing==='user');await v.play();
+    $('kCamBox').hidden=false;$('kCamBtn').hidden=false;$('kErr').textContent='';
+  }catch(e){stopAdmCam();$('kErr').textContent=e.name==='NotAllowedError'?'Izin kamera ditolak. Aktifkan izin kamera di browser, atau pakai Upload foto.':'Kamera tidak bisa dibuka: '+e.message}
+}
+$('kCam').onclick=bukaKamera;
+$('kFlip').onclick=()=>{admFacing=admFacing==='user'?'environment':'user';bukaKamera()};
+$('kCamX').onclick=stopAdmCam;
+$('kUp').onclick=()=>$('kFoto').click();
+$('kSnap').onclick=()=>{
+  const v=$('kVideo');if(!v.videoWidth)return;
+  const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);
+  muatFoto(c.toDataURL('image/jpeg',0.92));stopAdmCam();
+};
+function dariFile(e){const f=e.target.files[0];e.target.value='';if(!f)return;stopAdmCam();muatFoto(URL.createObjectURL(f))}
+$('kFoto').onchange=dariFile;$('kFotoCam').onchange=dariFile;
+function muatFoto(url){const im=new Image();im.onload=()=>pakaiFoto(im,url);im.onerror=()=>info('Foto tidak bisa dibaca.','bad');im.src=url}
+function pakaiFoto(im,url){
+  $('prev').src=url;$('prev').hidden=false;fotoDesc=fotoJpg=null;info('Memeriksa wajah…');
+  const job=(async()=>{
+    try{await loadModels()}catch(e){throw new Error('Pemeriksa wajah gagal dimuat. Muat ulang halaman.')}
+    const all=await faceapi.detectAllFaces(im,DOPT());
+    if(all.length!==1)throw new Error(all.length?'Terdeteksi lebih dari satu wajah. Gunakan foto satu orang.':'Wajah tidak terdeteksi. Gunakan foto yang lebih jelas.');
+    const det=await faceapi.detectSingleFace(im,DOPT()).withFaceLandmarks(true).withFaceDescriptor();
+    if(!det)throw new Error('Wajah tidak terbaca jelas. Coba foto lain.');
+    const w=Math.min(720,im.naturalWidth),h=Math.round(w*im.naturalHeight/im.naturalWidth),c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);
+    if(fotoJob!==job)return;
+    fotoDesc=Array.from(det.descriptor);fotoJpg=c.toDataURL('image/jpeg',0.8).split(',')[1];
+  })();
+  fotoJob=job;
+  job.then(()=>{if(fotoJob===job)info('Wajah terdeteksi. Foto siap disimpan.','ok')}).catch(e=>{if(fotoJob===job){fotoDesc=fotoJpg=null;info(e.message,'bad')}});
+}
+$('kSimpan').onclick=async()=>{
+  const err=$('kErr');err.textContent='';$('kSimpan').disabled=true;
+  try{
+    const id=$('kId').value.trim().toUpperCase();
+    if(fotoJob)await fotoJob;
+    let r=await api('admin_simpan',{data:{id,nama:$('kNama').value.trim(),jabatan:$('kJab').value.trim(),pin:$('kPin').value,status:$('kSt').value}});
+    if(!r.ok)throw new Error(r.pesan);
+    if(fotoDesc){r=await api('admin_wajah',{data:{id,desc:fotoDesc,foto:fotoJpg}});if(!r.ok)throw new Error(r.pesan)}
+    tutupKar();loadKar();
+  }catch(e){err.textContent=e.message||'Gagal menyimpan.'}
+  finally{$('kSimpan').disabled=false}
+};
+if(location.hash==='#admin')bukaAdmin();
 
 /* Tema: hijau atau gelap */
 function setTema(t){
