@@ -6,6 +6,7 @@
 <script>try{var t=localStorage.getItem('absen_tema');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Absensi Pasar Group Buah Abadi</title>
+<link rel="icon" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/dist/face-api.js"></script>
 <style>
@@ -95,6 +96,63 @@ video.mirror{transform:scaleX(-1)}
 .box h2{font:800 1.3rem/1.2 Unbounded;letter-spacing:-.02em}
 .box p{color:var(--muted);margin-top:8px}
 .box img{width:100%;max-height:34dvh;object-fit:cover;border-radius:20px;margin:16px 0 4px}
+
+.mark{position:relative}
+.mark.has-img{background:var(--panel-2);border:1px solid var(--line);border-radius:50%;width:46px;height:46px;transform:none;overflow:hidden}
+.mark.has-img svg{display:none}
+.mark img{width:100%;height:100%;object-fit:cover;display:block}
+.camchoose{display:grid;gap:10px}
+.actbar{margin-top:20px}
+.actbar #hint{margin:0 0 10px}
+.acts{grid-template-columns:1fr;margin-top:0}
+.win{grid-template-columns:1fr}
+@media(max-width:899px){
+  .page{padding-bottom:24px}
+  .bar{padding-top:12px}
+  .clockbox{padding:14px 0 12px}
+  #jam{font-size:clamp(2.2rem,11vw,3.2rem)}
+  #tgl{margin-top:4px;font-size:.82rem}
+  .loc{margin-top:8px;padding:6px 12px;font-size:.76rem}
+  main{gap:10px}
+  .stage{aspect-ratio:auto;height:clamp(210px,36dvh,340px);max-height:none;border-radius:26px}
+  .brk{inset:10px;opacity:.7}
+  .ring{inset:7% 26%}
+  .cam-top{top:16px;left:16px;right:16px}
+  .chip{padding:6px 11px;font-size:.68rem}
+  .cam-msg{padding:16px;gap:10px}
+  .cam-msg button{min-height:44px;padding:10px 16px;font-size:.7rem}
+  .panel{display:contents}
+  .geo,.win div{background:var(--panel);border:1px solid var(--line);border-radius:22px}
+  .geo{padding:12px 16px;gap:14px}
+  .radar{width:76px;height:76px}
+  #jarak{font-size:1.6rem}
+  #gpsinfo{margin-top:4px;font-size:.78rem}
+  .win{margin-top:0}
+  .win div{padding:10px 14px;font-size:.7rem;border-style:solid}
+  .actbar{position:sticky;bottom:calc(env(safe-area-inset-bottom) + 8px);z-index:6;margin-top:4px;padding:12px;border-radius:26px;background:var(--box);border:1px solid var(--line);box-shadow:0 -12px 30px -12px rgba(0,0,0,.45)}
+  .actbar #hint{font-size:.72rem;min-height:1.3em;margin-bottom:8px}
+}
+#vAdmin .mtx table{border-collapse:separate;border-spacing:0;min-width:max-content}
+#vAdmin .mtx th,#vAdmin .mtx td{white-space:nowrap;text-align:center;padding:9px 10px;border-bottom:1px solid var(--line)}
+#vAdmin .mtx th{font:600 .66rem 'JetBrains Mono',monospace;line-height:1.35;position:sticky;top:0;background:var(--box)}
+#vAdmin .mtx th.mg{color:var(--red)}
+#vAdmin .mtx th:first-child,#vAdmin .mtx td:first-child{position:sticky;left:0;z-index:2;text-align:left;background:var(--box);min-width:120px;border-right:1px solid var(--line)}
+#vAdmin .mtx td.mc{font:600 .74rem 'JetBrains Mono',monospace}
+#vAdmin .mtx td.ok{color:var(--lime);background:rgba(200,241,53,.08)}
+#vAdmin .mtx td.late{color:var(--orange);background:rgba(255,138,42,.12)}
+#vAdmin .mtx td.no{color:var(--muted);background:rgba(255,92,92,.07)}
+#vAdmin .mtx td[data-foto]{cursor:pointer;text-decoration:underline dotted}
+#vAdmin .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:12px;font-size:.74rem;color:var(--muted)}
+#vAdmin .lg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+#vAdmin .lg.ok::before{background:var(--lime)}#vAdmin .lg.late::before{background:var(--orange)}#vAdmin .lg.no::before{background:var(--red);opacity:.6}
+#vAdmin .range{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin-top:18px}
+#vAdmin .rg{display:flex;gap:12px;flex-wrap:wrap}
+#vAdmin .rg>div{min-width:150px}
+#vAdmin .rg label{margin-top:0}
+#vAdmin .qk{display:flex;gap:8px;flex-wrap:wrap}
+#vAdmin .qk button{min-height:44px;padding:8px 14px;font-size:.64rem}
+#vAdmin .tscroll{overflow-x:auto}
+#vAdmin .tscroll td button{min-height:36px;padding:4px 12px;font-size:.62rem}
 #vAdmin .top{padding:calc(env(safe-area-inset-top) + 24px) clamp(16px,4vw,36px) 8px}
 #vAdmin .wrap{max-width:1180px;margin:0 auto}
 #vAdmin .top .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
@@ -152,7 +210,7 @@ video.mirror{transform:scaleX(-1)}
 @media(max-width:560px){.live{display:none}}
 #vAdmin .sheet{display:flex;justify-content:center;align-items:flex-start}
 #vAdmin .sheet>*{margin:auto}
-@media(max-width:560px){#vAdmin th:nth-child(4),#vAdmin td:nth-child(4){display:none}}
+@media(max-width:560px){#vAdmin #tKar th:nth-child(4),#vAdmin #tKar td:nth-child(4){display:none}}
 .kf{width:48px;height:48px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--muted);font-size:.7rem}
 .kf img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;display:block}
 .pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -168,7 +226,7 @@ video.mirror{transform:scaleX(-1)}
 <div id="vAbsen">
 <div class="page">
   <div class="bar">
-    <div class="wm"><div class="mark"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M12 6c0-3 2-4 5-4 0 3-2 5-5 4z"/></svg></div><div>BUAH ABADI<small>ABSENSI PASAR</small></div></div>
+    <div class="wm"><div class="mark"><img src="logo.png" alt="Logo" hidden onload="this.hidden=false;this.parentNode.classList.add('has-img')"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M12 6c0-3 2-4 5-4 0 3-2 5-5 4z"/></svg></div><div>BUAH ABADI<small>ABSENSI PASAR</small></div></div>
     <div class="bar-r"><button class="b-glass mini" id="btnAdmin">Login Admin</button><button class="b-glass tema" aria-label="Ganti tema"></button><div class="live"><i></i>Live</div></div>
   </div>
   <div class="clockbox">
@@ -181,7 +239,7 @@ video.mirror{transform:scaleX(-1)}
       <video id="video" autoplay playsinline muted class="mirror"></video>
       <div class="ring" id="ring"></div><div class="brk"></div>
       <div class="cam-top"><span class="chip" id="faceChip"><i></i><span>Memuat pemeriksa wajah…</span></span><button class="b-glass" id="btnFlip" hidden>Balik</button></div>
-      <div class="cam-msg" id="camMsg"><div>Kamera dipakai untuk memindai wajah dan foto bukti absen.</div><div><button class="b-main" id="btnCam">Aktifkan kamera</button></div><div><button class="b-glass" id="btnFile" hidden>Ambil foto lewat kamera HP</button></div></div>
+      <div class="cam-msg" id="camMsg"><div>Kamera dipakai untuk memindai wajah dan foto bukti absen.</div><div class="camchoose"><button class="b-main" id="btnCam">Kamera depan</button><button class="b-glass" id="btnCamB">Kamera belakang</button></div><div><button class="b-glass" id="btnFile" hidden>Ambil foto lewat kamera HP</button></div></div>
       <input type="file" id="fileCam" accept="image/*" capture="user" hidden>
     </section>
 
@@ -190,9 +248,8 @@ video.mirror{transform:scaleX(-1)}
         <div class="radar" role="img" aria-label="Posisi Anda terhadap radius pasar"><div class="zone"></div><div class="core"></div><div class="dot" id="dot" style="display:none"></div></div>
         <div><div id="jarak">–</div><div id="gpsinfo">Mencari sinyal GPS…</div></div>
       </div>
-      <div class="win"><div id="wMasuk"><b>Masuk</b><span></span></div><div id="wPulang"><b>Pulang</b><span></span></div></div>
-      <div class="acts"><button class="b-main" id="btnMasuk" disabled>Absen masuk</button><button class="b-sun" id="btnPulang" disabled>Absen pulang</button></div>
-      <div id="hint" role="status"></div>
+      <div class="win"><div id="wMasuk"><b>Masuk</b><span></span></div></div>
+      <div class="actbar"><div id="hint" role="status"></div><div class="acts"><button class="b-main" id="btnMasuk" disabled>Absen masuk</button></div></div>
     </section>
   </main>
 </div>
@@ -219,13 +276,26 @@ video.mirror{transform:scaleX(-1)}
   <div class="top"><div class="wrap">
     <div><h1>Dashboard Admin</h1><div class="sub" id="subLok">Absensi Pasar Group Buah Abadi</div></div>
     <div class="tabs"><button class="on" data-tab="hari">Kehadiran</button><button data-tab="kar">Karyawan</button></div>
-    <div class="tools"><input type="date" id="aTgl" aria-label="Tanggal"><button class="b-glass tema" aria-label="Ganti tema"></button><button class="b-glass" id="btnRef">Muat ulang</button><button class="b-glass" id="btnOut">Keluar</button></div>
+    <div class="tools"><button class="b-glass tema" aria-label="Ganti tema"></button><button class="b-glass" id="btnRef">Muat ulang</button><button class="b-glass" id="btnOut">Keluar</button></div>
   </div></div>
   <div class="amain">
     <div id="tHari">
+      <div class="card range">
+        <div class="rg"><div><label for="aTgl">Dari tanggal</label><input type="date" id="aTgl"></div><div><label for="aTgl2">Sampai tanggal</label><input type="date" id="aTgl2"></div></div>
+        <div class="qk"><button class="b-line" data-q="hari">Hari ini</button><button class="b-line" data-q="7">7 hari</button><button class="b-line" data-q="bulan">Bulan ini</button></div>
+      </div>
       <div class="stats" id="stats"></div>
-      <h2>Sudah absen</h2><div class="grid" id="hadir"></div>
-      <h2>Belum absen</h2><div class="pills" id="belum"></div>
+      <div id="vHarian">
+        <h2>Sudah absen</h2><div class="grid" id="hadir"></div>
+        <h2>Belum absen</h2><div class="pills" id="belum"></div>
+      </div>
+      <div id="vRentang" hidden>
+        <h2>Tabel kehadiran <button class="b-line" id="btnCsv" style="margin-left:10px;min-height:38px;padding:6px 14px;font-size:.62rem">Unduh CSV</button></h2>
+        <div class="card">
+          <div class="tscroll mtx"><table><thead id="mtHead"></thead><tbody id="mtBody"></tbody></table></div>
+          <div class="legend"><span class="lg ok">Tepat waktu</span><span class="lg late">Terlambat</span><span class="lg no">Tidak absen</span><span>Ketuk jam untuk melihat foto.</span></div>
+        </div>
+      </div>
     </div>
     <div id="tKar" hidden>
       <div class="card">
@@ -257,7 +327,7 @@ video.mirror{transform:scaleX(-1)}
 
 <script>
 /* GANTI dengan URL Web app Apps Script Anda (berakhiran /exec) */
-const API_URL='https://script.google.com/macros/s/AKfycbwIvkSzJIOnZB-xtOKOu9V9uAdL-V_YPokZtGuXYjLsC7rTn9uEmq1BPyX7af6U_18GHw/exec';
+const API_URL='https://script.google.com/macros/s/AKfycbxNcGrspIS9JD2v78YqHI3OH_AaHCU5C6RviztCzpgA2zW0NTG-v06MQ-Iel3GWoXvG/exec';
 const MODEL_URL='https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.12/model/';
 let cfg=null, off=0, pos=null, stream=null, facing='user', busy=false, shotImg=null, faceReady=false, faceOk=false;
 const $=id=>document.getElementById(id);
@@ -269,7 +339,6 @@ fetch(API_URL+'?action=config').then(r=>r.json()).then(c=>{
   if(c.ok===false)throw new Error(c.pesan);
   cfg=c; off=c.serverNow-Date.now(); $('lokasi').textContent=c.nama;
   $('wMasuk').querySelector('span').textContent=lbl(c.masuk.buka)+' - '+lbl(c.masuk.tutup)+', tepat waktu sampai '+lbl(c.masuk.tepat);
-  $('wPulang').querySelector('span').textContent=lbl(c.pulang.buka)+' - '+lbl(c.pulang.tutup);
   tick();
 }).catch(e=>{$('lokasi').textContent='Gagal memuat konfigurasi: '+e.message});
 
@@ -286,10 +355,10 @@ function tick(){
   if(!cfg)return;
   const n=nowMin(); $('jam').textContent=n.s;
   $('tgl').textContent=new Date(Date.now()+off).toLocaleDateString('id-ID',{timeZone:cfg.tz,weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  [['masuk','wMasuk'],['pulang','wPulang']].forEach(([k,id])=>{
+  [['masuk','wMasuk']].forEach(([k,id])=>{
     const s=winState(k,n.m),el=$(id);
     el.className=(s.ok?'on':'')+(s.late?' late':'');
-    el.querySelector('b').textContent=(k==='masuk'?'Masuk: ':'Pulang: ')+s.t;
+    el.querySelector('b').textContent='Masuk: '+s.t;
   });
   refresh();
 }
@@ -322,7 +391,7 @@ async function startCam(){
     if(stream)stream.getTracks().forEach(t=>t.stop());
     stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:facing},width:{ideal:1280},height:{ideal:960}},audio:false});
     const v=$('video');v.srcObject=stream;v.classList.toggle('mirror',facing==='user');await v.play();
-    $('camMsg').hidden=true;$('btnFlip').hidden=false;
+    $('camMsg').hidden=true;$('btnFlip').hidden=false;$('btnFlip').textContent=facing==='user'?'Ke belakang':'Ke depan';
   }catch(e){
     $('camMsg').hidden=false;$('btnFile').hidden=false;
     $('camMsg').firstElementChild.textContent=e.name==='NotAllowedError'?'Izin kamera ditolak. Aktifkan izin kamera di pengaturan browser, lalu coba lagi.':'Kamera tidak bisa dibuka: '+e.message;
@@ -337,9 +406,10 @@ function stopCam(){
   if(faceReady)setFace('Arahkan wajah ke kamera','');
   refresh();
 }
-$('btnCam').onclick=startCam;
+$('btnCam').onclick=()=>{facing='user';startCam()};
+$('btnCamB').onclick=()=>{facing='environment';startCam()};
 $('btnFlip').onclick=()=>{facing=facing==='user'?'environment':'user';startCam()};
-$('btnFile').onclick=()=>$('fileCam').click();
+$('btnFile').onclick=()=>{$('fileCam').setAttribute('capture',facing);$('fileCam').click()};
 $('fileCam').onchange=e=>{
   const f=e.target.files[0];if(!f)return;
   const im=new Image();
@@ -388,9 +458,9 @@ function refresh(){
   else if(!pos)why='Menunggu lokasi GPS…';
   else if(!accOk)why='Akurasi GPS ±'+Math.round(pos.acc)+' m, perlu ≤ '+cfg.akurasiMaks+' m. Pindah ke tempat terbuka.';
   else if(!inside)why='Anda berada di luar radius pasar.';
-  const m=winState('masuk',n.m),p=winState('pulang',n.m),base=!why&&!busy;
-  $('btnMasuk').disabled=!(base&&m.ok);$('btnPulang').disabled=!(base&&p.ok);
-  if(!why&&!m.ok&&!p.ok)why='Di luar jam absen.';
+  const m=winState('masuk',n.m),base=!why&&!busy;
+  $('btnMasuk').disabled=!(base&&m.ok);
+  if(!why&&!m.ok)why='Di luar jam absen.';
   $('hint').textContent=busy?'Memproses wajah dan mengirim absen…':why;
 }
 
@@ -418,7 +488,6 @@ async function kirim(tipe){
   refresh();
 }
 $('btnMasuk').onclick=()=>kirim('Masuk');
-$('btnPulang').onclick=()=>kirim('Pulang');
 
 function tampil(r,img){
   $('hasilBox').className='box '+(r.ok?'ok':'err');
@@ -456,26 +525,77 @@ $('btnLogin').onclick=async()=>{
 $('apin').addEventListener('keydown',e=>{if(e.key==='Enter')$('btnLogin').click()});
 $('btnOut').onclick=()=>{token=null;ss.del('adm_token');tutupKar();view('absen')};
 $('btnRef').onclick=()=>{photoCache={};load()};
-$('aTgl').onchange=load;
+$('aTgl').onchange=()=>{if($('aTgl2').value<$('aTgl').value)$('aTgl2').value=$('aTgl').value;load()};
+$('aTgl2').onchange=()=>{if($('aTgl2').value<$('aTgl').value)$('aTgl').value=$('aTgl2').value;load()};
+function geser(t,n){const x=new Date(t+'T00:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)}
+document.querySelectorAll('.qk button').forEach(b=>b.onclick=()=>{
+  const t=todayWib();let d=t;
+  if(b.dataset.q==='7')d=geser(t,-6);if(b.dataset.q==='bulan')d=t.slice(0,8)+'01';
+  $('aTgl').value=d;$('aTgl2').value=t;load();
+});
 
 function todayWib(){return new Date().toLocaleDateString('en-CA',{timeZone:'Asia/Jakarta'})}
-function start(){view('app');if(!$('aTgl').value)$('aTgl').value=todayWib();load();loadKar()}
+function start(){view('app');if(!$('aTgl').value){$('aTgl').value=$('aTgl2').value=todayWib()}load();loadKar()}
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
   $('tHari').hidden=b.dataset.tab!=='hari';$('tKar').hidden=b.dataset.tab!=='kar';
 });
 
 /* Kehadiran */
+let loadSeq=0,rentangData=null;
+const tglId=t=>t.slice(8,10)+'/'+t.slice(5,7)+'/'+t.slice(0,4);
+function statCards(a){$('stats').innerHTML=a.map(x=>'<div class="card stat '+x[2]+'"><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('')}
 async function load(){
+  let d=$('aTgl').value,s=$('aTgl2').value;
+  if(!d)d=$('aTgl').value=todayWib();
+  if(!s||s<d)s=$('aTgl2').value=d;
+  const my=++loadSeq;
+  if(d===s)return loadHari(d,my);
+  return loadRentang(d,s,my);
+}
+const HARI=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+function buatMatriks(x){
+  const tg=[],idx={};
+  for(let t=x.dari;t<=x.sampai;t=geser(t,1))tg.push(t);
+  x.rows.forEach(w=>{idx[w.id+'|'+w.tanggal]=w});
+  return{tg,idx};
+}
+async function loadRentang(d,s,my){
+  $('vHarian').hidden=true;$('vRentang').hidden=false;
+  $('mtHead').innerHTML='';$('mtBody').innerHTML='<tr><td>Memuat…</td></tr>';
+  const r=await api('admin_rentang',{dari:d,sampai:s});
+  if(my!==loadSeq)return;
+  if(!r.ok){$('mtBody').innerHTML='<tr><td>'+esc(r.pesan)+'</td></tr>';return}
+  const x=r.data,k=x.ringkas;rentangData=x;
+  $('subLok').textContent=x.lokasi+', radius '+x.radius+' m';
+  statCards([['Karyawan aktif',k.aktif,''],['Jumlah hari',k.hari,''],['Total absen masuk',k.hadir,''],['Terlambat',k.terlambat,'late']]);
+  const m=buatMatriks(x);
+  $('mtHead').innerHTML='<tr><th>Nama</th>'+m.tg.map(t=>{const h=new Date(t+'T00:00:00Z').getUTCDay();return '<th class="'+(h===0?'mg':'')+'">'+HARI[h]+'<br>'+t.slice(8,10)+'/'+t.slice(5,7)+'</th>'}).join('')+'<th>Hadir</th><th>Terlambat</th><th>Tidak hadir</th></tr>';
+  $('mtBody').innerHTML=x.rekap.map(w=>'<tr><td>'+esc(w.nama)+'</td>'+m.tg.map(t=>{
+    const c=m.idx[w.id+'|'+t];
+    if(!c)return '<td class="mc no">–</td>';
+    return '<td class="mc '+(c.status==='Terlambat'?'late':'ok')+'"'+(c.foto?' data-foto="'+esc(c.foto)+'" title="Lihat foto"':'')+'>'+esc(String(c.jam).slice(0,5))+'</td>';
+  }).join('')+'<td><b>'+w.hadir+'</b></td><td>'+w.terlambat+'</td><td>'+w.tidakHadir+'</td></tr>').join('')||'<tr><td colspan="'+(m.tg.length+4)+'">Belum ada karyawan.</td></tr>';
+}
+$('btnCsv').onclick=()=>{
+  const x=rentangData;if(!x)return;
+  const m=buatMatriks(x),q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const baris=[['Nama'].concat(m.tg,['Hadir','Terlambat','Tidak hadir'])].concat(x.rekap.map(w=>[w.nama].concat(m.tg.map(t=>{const c=m.idx[w.id+'|'+t];return c?String(c.jam).slice(0,5)+(c.status==='Terlambat'?' (terlambat)':''):''}),[w.hadir,w.terlambat,w.tidakHadir])));
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\ufeff'+baris.map(l=>l.map(q).join(';')).join('\r\n')],{type:'text/csv;charset=utf-8'}));
+  a.download='absensi_'+x.dari+'_sd_'+x.sampai+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+};
+async function loadHari(tgl,my){
+  $('vHarian').hidden=false;$('vRentang').hidden=true;
   $('hadir').innerHTML='<div class="card">Memuat…</div>';
-  const r=await api('admin_rekap',{tanggal:$('aTgl').value});
+  const r=await api('admin_rekap',{tanggal:tgl});
+  if(my!==loadSeq)return;
   if(!r.ok){$('hadir').innerHTML='<div class="card">'+esc(r.pesan)+'</div>';return}
   const d=r.data,s=d.ringkas;
   $('subLok').textContent=d.lokasi+', radius '+d.radius+' m';
-  $('stats').innerHTML=[['Karyawan aktif',s.aktif,''],['Sudah hadir',s.hadir,''],['Terlambat',s.terlambat,'late'],['Belum absen',s.belum,'miss'],['Sudah pulang',s.pulang,'']]
-    .map(x=>'<div class="card stat '+x[2]+'"><b>'+x[1]+'</b><span>'+x[0]+'</span></div>').join('');
+  statCards([['Karyawan aktif',s.aktif,''],['Sudah hadir',s.hadir,''],['Terlambat',s.terlambat,'late'],['Belum absen',s.belum,'miss']]);
   $('hadir').innerHTML=d.hadir.length?d.hadir.map(h=>
-    '<div class="card"><div class="emp-h"><b>'+esc(h.nama)+'</b><span>'+esc(h.id)+' · '+esc(h.jabatan)+'</span></div><div class="shots">'+shot('Masuk',h.masuk,d.radius)+shot('Pulang',h.pulang,d.radius)+'</div></div>').join(''):'<div class="card">Belum ada yang absen pada tanggal ini.</div>';
+    '<div class="card"><div class="emp-h"><b>'+esc(h.nama)+'</b><span>'+esc(h.id)+' · '+esc(h.jabatan)+'</span></div><div class="shots">'+shot('Masuk',h.masuk,d.radius)+'</div></div>').join(''):'<div class="card">Belum ada yang absen pada tanggal ini.</div>';
   $('belum').innerHTML=d.belum.length?d.belum.map(k=>'<span class="pill">'+esc(k.nama)+' <small>'+esc(k.id)+'</small></span>').join(''):'<span class="sub" style="color:var(--muted)">Semua karyawan aktif sudah absen.</span>';
   lazy();
 }
@@ -495,7 +615,17 @@ const io=new IntersectionObserver(es=>es.forEach(async e=>{
   }catch(x){el.textContent='Foto gagal dimuat'}
 }),{rootMargin:'200px'});
 function lazy(){document.querySelectorAll('[data-url]').forEach(el=>io.observe(el))}
-document.addEventListener('click',e=>{if(e.target.dataset&&e.target.dataset.z){$('zImg').src=e.target.src;$('mZoom').hidden=false}});
+document.addEventListener('click',async e=>{
+  const t=e.target;if(!t.dataset)return;
+  if(t.dataset.z){$('zImg').src=t.src;$('mZoom').hidden=false}
+  else if(t.dataset.foto){
+    const u=t.dataset.foto;
+    try{
+      if(!photoCache[u]){const r=await api('admin_foto',{url:u});if(!r.ok)throw new Error(r.pesan);photoCache[u]=r.data}
+      $('zImg').src=photoCache[u];$('mZoom').hidden=false;
+    }catch(x){t.title='Foto gagal dimuat'}
+  }
+});
 $('mZoom').onclick=()=>{$('mZoom').hidden=true};
 
 /* Karyawan */
