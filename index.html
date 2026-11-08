@@ -145,6 +145,10 @@ video.mirror{transform:scaleX(-1)}
 #vAdmin .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin-top:12px;font-size:.74rem;color:var(--muted)}
 #vAdmin .lg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 #vAdmin .lg.ok::before{background:var(--lime)}#vAdmin .lg.late::before{background:var(--orange)}#vAdmin .lg.no::before{background:var(--red);opacity:.6}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:5}
+.flash.on{animation:kedip .45s ease-out}
+@keyframes kedip{0%{opacity:.85}100%{opacity:0}}
+#vAdmin .jamx{font:700 1.05rem 'JetBrains Mono',monospace;color:var(--lime)}
 #vAdmin .range{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;justify-content:space-between;margin-top:18px}
 #vAdmin .rg{display:flex;gap:12px;flex-wrap:wrap}
 #vAdmin .rg>div{min-width:150px}
@@ -237,7 +241,7 @@ video.mirror{transform:scaleX(-1)}
   <main>
     <section class="stage" aria-label="Kamera">
       <video id="video" autoplay playsinline muted class="mirror"></video>
-      <div class="ring" id="ring"></div><div class="brk"></div>
+      <div class="flash" id="flash"></div><div class="ring" id="ring"></div><div class="brk"></div>
       <div class="cam-top"><span class="chip" id="faceChip"><i></i><span>Memuat pemeriksa wajah…</span></span><button class="b-glass" id="btnFlip" hidden>Balik</button></div>
       <div class="cam-msg" id="camMsg"><div>Kamera dipakai untuk memindai wajah dan foto bukti absen.</div><div class="camchoose"><button class="b-main" id="btnCam">Kamera depan</button><button class="b-glass" id="btnCamB">Kamera belakang</button></div><div><button class="b-glass" id="btnFile" hidden>Ambil foto lewat kamera HP</button></div></div>
       <input type="file" id="fileCam" accept="image/*" capture="user" hidden>
@@ -461,25 +465,32 @@ function refresh(){
   const m=winState('masuk',n.m),base=!why&&!busy;
   $('btnMasuk').disabled=!(base&&m.ok);
   if(!why&&!m.ok)why='Di luar jam absen.';
-  $('hint').textContent=busy?'Memproses wajah dan mengirim absen…':why;
+  $('hint').textContent=busy?'Foto sudah diambil, HP boleh diletakkan. Memproses absen…':why;
 }
 
 /* Ambil foto, hitung descriptor wajah, kirim */
-function snap(src,label){
-  const live=src===$('video'),sw=live?src.videoWidth:src.naturalWidth,sh=live?src.videoHeight:src.naturalHeight,w=Math.min(720,sw),h=Math.round(w*sh/sw);
-  const c=document.createElement('canvas');c.width=w;c.height=h;
-  const g=c.getContext('2d');g.drawImage(src,0,0,w,h);
+function grab(src){
+  const live=src===$('video'),sw=live?src.videoWidth:src.naturalWidth,sh=live?src.videoHeight:src.naturalHeight,w=Math.min(1280,sw),h=Math.round(w*sh/sw);
+  const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(src,0,0,w,h);
+  return c;
+}
+function stampFrom(c,label){
+  const w=Math.min(720,c.width),h=Math.round(w*c.height/c.width),o=document.createElement('canvas');o.width=w;o.height=h;
+  const g=o.getContext('2d');g.drawImage(c,0,0,w,h);
   g.fillStyle='rgba(0,0,0,.55)';g.fillRect(0,h-34,w,34);
   g.fillStyle='#fff';g.font='600 15px sans-serif';g.fillText(label,10,h-12);
-  return c.toDataURL('image/jpeg',0.72);
+  return o.toDataURL('image/jpeg',0.72);
 }
+function kedip(){const f=$('flash');f.classList.remove('on');void f.offsetWidth;f.classList.add('on')}
 async function kirim(tipe){
-  if(busy)return;busy=true;refresh();
-    const src=shotImg||$('video');
+  if(busy)return;
+  /* Foto langsung diambil di sini, sebelum proses apa pun, supaya wajah masih di depan kamera */
+  const frame=grab(shotImg||$('video'));
+  const stamp=stampFrom(frame,tipe+'  '+$('tgl').textContent+' '+$('jam').textContent);
+  kedip();busy=true;refresh();
   try{
-    const det=await faceapi.detectSingleFace(src,TFO()).withFaceLandmarks(true).withFaceDescriptor();
+    const det=await faceapi.detectSingleFace(frame,TFO()).withFaceLandmarks(true).withFaceDescriptor();
     if(!det){busy=false;tampil({ok:false,pesan:'Wajah tidak terbaca jelas. Coba lagi dengan pencahayaan lebih baik.'},null);refresh();return}
-    const stamp=snap(src,tipe+'  '+$('tgl').textContent+' '+$('jam').textContent);
     const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify({action:'absen',data:{tipe,lat:pos.lat,lng:pos.lng,akurasi:pos.acc,desc:Array.from(det.descriptor),foto:stamp.split(',')[1]}})}).then(x=>x.json());
     busy=false;tampil(r,stamp);
@@ -543,12 +554,13 @@ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
 
 /* Kehadiran */
 let loadSeq=0,rentangData=null,waPesan='';
+const jamSkrg=()=>new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit'});
 const tglPanjang=t=>new Date(t+'T00:00:00Z').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'});
 function pesanHarian(d){
   const h=d.hadir.slice().sort((a,b)=>String(a.masuk.jam).localeCompare(String(b.masuk.jam))),k=d.ringkas;
-  const L=['*Absensi '+d.lokasi+'*',tglPanjang(d.tanggal),'',
+  const L=['*Absensi '+d.lokasi+'*',tglPanjang(d.tanggal),'Dilaporkan pukul '+jamSkrg()+' WIB','',
     'Hadir: '+k.hadir+' dari '+k.aktif+' karyawan','Terlambat: '+k.terlambat,'Belum absen: '+k.belum,'','*Sudah absen*'];
-  if(h.length)h.forEach((w,i)=>L.push((i+1)+'. '+w.nama+' - '+String(w.masuk.jam).slice(0,5)+(w.masuk.status==='Terlambat'?' (terlambat)':'')));
+  if(h.length)h.forEach((w,i)=>L.push((i+1)+'. '+w.nama+' - pukul '+String(w.masuk.jam).slice(0,5)+' WIB'+(w.masuk.status==='Terlambat'?' (terlambat)':'')));
   else L.push('-');
   L.push('','*Belum absen*');
   if(d.belum.length)d.belum.forEach(w=>L.push('- '+w.nama));else L.push('-');
@@ -556,9 +568,16 @@ function pesanHarian(d){
 }
 function pesanRentang(x){
   const k=x.ringkas;
-  const L=['*Rekap Absensi '+x.lokasi+'*','Periode: '+tglId(x.dari)+' - '+tglId(x.sampai)+' ('+x.hari+' hari)','',
+  const m=buatMatriks(x);
+  const L=['*Rekap Absensi '+x.lokasi+'*','Dilaporkan '+tglId(todayWib())+' pukul '+jamSkrg()+' WIB','Periode: '+tglId(x.dari)+' - '+tglId(x.sampai)+' ('+x.hari+' hari)','',
     'Total absen masuk: '+k.hadir,'Terlambat: '+k.terlambat,'','*Per karyawan*'];
-  x.rekap.forEach((w,i)=>L.push((i+1)+'. '+w.nama+': hadir '+w.hadir+', terlambat '+w.terlambat+', tidak hadir '+w.tidakHadir));
+  x.rekap.forEach((w,i)=>{
+    L.push((i+1)+'. '+w.nama+': hadir '+w.hadir+', terlambat '+w.terlambat+', tidak hadir '+w.tidakHadir);
+    if(x.hari<=10){
+      const j=m.tg.map(t=>{const c=m.idx[w.id+'|'+t];return c?t.slice(8,10)+'/'+t.slice(5,7)+' '+String(c.jam).slice(0,5)+(c.status==='Terlambat'?' (T)':''):''}).filter(Boolean);
+      if(j.length)L.push('   '+j.join(', '));
+    }
+  });
   return L.join('\n');
 }
 $('btnWa').onclick=()=>{
@@ -626,7 +645,7 @@ async function loadHari(tgl,my){
 function shot(tipe,x,radius){
   if(!x)return '<figure><div class="ph">Belum absen '+tipe.toLowerCase()+'</div></figure>';
   const out=x.jarak>radius,cls=x.status==='Terlambat'?'late':'';
-  return '<figure><div class="ph">'+(x.foto?'<span data-url="'+esc(x.foto)+'">Memuat foto…</span>':'Tanpa foto')+'</div><figcaption><b>'+tipe+' '+esc(String(x.jam).slice(0,5))+'</b> <span class="tag '+cls+'">'+esc(x.status)+'</span><br>Jarak '+esc(x.jarak)+' m dari lokasi'+(out?' <span class="tag bad">di luar radius</span>':'')+
+  return '<figure><div class="ph">'+(x.foto?'<span data-url="'+esc(x.foto)+'">Memuat foto…</span>':'Tanpa foto')+'</div><figcaption><span class="jamx">'+esc(String(x.jam).slice(0,5))+' WIB</span><br><b>'+tipe+'</b> <span class="tag '+cls+'">'+esc(x.status)+'</span><br>Jarak '+esc(x.jarak)+' m dari lokasi'+(out?' <span class="tag bad">di luar radius</span>':'')+
     '<br>Kecocokan wajah: '+(x.wajah===''||x.wajah==null?'tidak dicek':esc(x.wajah)+' (makin kecil makin mirip)')+
     '<br><a href="https://www.google.com/maps?q='+esc(x.lat)+','+esc(x.lng)+'" target="_blank" rel="noopener">Lihat di peta</a></figcaption></figure>';
 }
